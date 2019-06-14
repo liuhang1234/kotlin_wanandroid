@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
-open class OkHttpUtil {
+object  OkHttpUtil {
     private var client: OkHttpClient? = null // client对象
 
     fun defaultOkHttpClient():OkHttpClient {
