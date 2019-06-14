@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:elevation="@dimen/dimen_0_dip">
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/colorAccent"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/back"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    >
+        <!--设置图片位置左右        android:paddingLeft="-20dp" -->
+        <!--        app:layout_scrollFlags="scroll|enterAlways"
+-->
+
+        <ImageView
+                android:id="@+id/left_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:paddingRight="@dimen/dimen_15_dip"
+                android:visibility="gone"
+                tools:src="@drawable/share"/>
+        <TextView
+                android:id="@+id/right_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dimen_10_dip"
+                android:paddingRight="@dimen/dimen_10_dip"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/common_text_size13"
+                android:visibility="gone"
+                tools:text="关闭"/>
+
+        <ImageView
+                android:id="@+id/right_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dimen_8_dip"
+                android:paddingRight="@dimen/dimen_15_dip"
+                android:visibility="gone"
+                tools:src="@drawable/share"/>
+        <ImageView
+                android:id="@+id/right2_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dimen_8_dip"
+                android:paddingRight="@dimen/dimen_7_dip"
+                android:visibility="gone"
+                tools:src="@drawable/share"/>
+        <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="@dimen/dimen_200_dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxEms="7"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/common_text_size17"
+                tools:text="标题"/>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+            android:id="@+id/toolbar_bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"/>
+</com.google.android.material.appbar.AppBarLayout>

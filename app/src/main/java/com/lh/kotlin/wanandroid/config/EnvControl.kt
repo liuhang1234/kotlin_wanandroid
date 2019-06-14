@@ -2,7 +2,7 @@ package com.lh.kotlin.wanandroid.config
 
 object EnvControl {
     // DEBUG release
-    var BASE_URL = "http://m.docren.com/"
+    const val BASE_URL = "https://www.wanandroid.com/"
 
 
 }
