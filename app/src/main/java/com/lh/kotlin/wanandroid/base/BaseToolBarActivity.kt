@@ -3,6 +3,7 @@ package com.lh.kotlin.wanandroid.base
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.Toolbar
 import android.view.View
@@ -14,19 +15,18 @@ import com.lh.kotlin.wanandroid.utils.ActivityUtils
 
 abstract class BaseToolBarActivity : BaseActivity(),View.OnClickListener {
 
-    protected var mAppBarLayout: AppBarLayout? = null
-    protected var mToolbar: Toolbar? = null
+    private var mAppBarLayout: AppBarLayout? = null
+    private var mToolbar: Toolbar? = null
     private var mTitle: TextView? = null
-    private var toolbarBottomLine: View? = null
 
 
     private var mLeftIv: ImageView? = null // 左图片
     private var mRightIv: ImageView? = null // 右图片
-    protected var mRightTv: TextView? = null // 右标题
+    private var mRightTv: TextView? = null // 右标题
     private var mRight2Iv: ImageView? = null // 右二图片（靠左的那个）
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(setLayoutId())
         handleIntent(intent)
         addFragmentToActivity()
@@ -34,20 +34,21 @@ abstract class BaseToolBarActivity : BaseActivity(),View.OnClickListener {
     }
 
     //初始化数据
-    protected fun init() {
+    open fun init() {
         initToolBar()
     }
 
     private fun initToolBar() {
-        mAppBarLayout = findViewById(R.id.app_bar_layout) as AppBarLayout?
-        mToolbar = findViewById(R.id.toolbar) as Toolbar?
-        mTitle = findViewById(R.id.title) as TextView?
-        mLeftIv = findViewById(R.id.left_iv) as ImageView?
-        mRightIv = findViewById(R.id.right_iv) as ImageView?
-        mRightTv = findViewById(R.id.right_tv) as TextView?
-        mRight2Iv = findViewById(R.id.right2_iv) as ImageView?
+        mAppBarLayout = findViewById(R.id.app_bar_layout)
+        mToolbar = findViewById(R.id.toolbar)
+        mTitle = findViewById(R.id.title)
+        mLeftIv = findViewById(R.id.left_iv)
+        mRightIv = findViewById(R.id.right_iv)
+        mRightTv = findViewById(R.id.right_tv)
+        mRight2Iv = findViewById(R.id.right2_iv)
 
         if (mToolbar == null || mAppBarLayout == null) {
+            Log.e("liuhang","mToolbar = "+mToolbar +"  mAppBarLayout = "+mAppBarLayout)
             throw IllegalStateException(
                 "The BaseToolBarActivity must contain a toolbar."
             )
@@ -81,12 +82,18 @@ abstract class BaseToolBarActivity : BaseActivity(),View.OnClickListener {
     protected fun showLeftIv(b: Boolean) {
     }
 
-
+    protected fun showToolbar(show: Boolean) {
+        if (show) {
+            mAppBarLayout?.setVisibility(View.VISIBLE)
+            return
+        }
+        mAppBarLayout?.setVisibility(View.GONE)
+    }
     override fun onClick(v: View?) {
     }
-    protected abstract fun getFragment(): BaseFragment?
+     abstract fun getFragment(): BaseFragment?
     // 添加fragment
-    protected fun addFragmentToActivity() {
+     fun addFragmentToActivity() {
         var fragment: Fragment? = supportFragmentManager.findFragmentById(getFragmentContentId())
         if (fragment == null) {
             fragment = getFragment()
@@ -96,9 +103,9 @@ abstract class BaseToolBarActivity : BaseActivity(),View.OnClickListener {
         }
     }
 
-    protected abstract fun setLayoutId(): Int
-    protected abstract fun getFragmentContentId(): Int
-    protected fun handleIntent(intent: Intent) {
+     abstract fun setLayoutId(): Int
+     abstract fun getFragmentContentId(): Int
+     fun handleIntent(intent: Intent) {
 
     }
     protected fun showBackBtn(show: Boolean) {

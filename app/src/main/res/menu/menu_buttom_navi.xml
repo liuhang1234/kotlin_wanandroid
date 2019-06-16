@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/home"
+            android:title="@string/main_home"
+            android:icon="@drawable/icon_home"
+            android:iconTint="@color/colorAccent"
+    />
+    <item
+            android:id="@+id/system"
+            android:title="@string/main_system"
+            android:iconTint="@color/colorAccent"
+            android:icon="@drawable/icon_system"
+
+    />
+    <item
+            android:id="@+id/project"
+            android:title="@string/main_project"
+            android:icon="@drawable/icon_project"
+            android:iconTint="@color/colorAccent"
+
+    />
+    <item
+            android:id="@+id/my"
+            android:title="@string/main_my"
+            android:icon="@drawable/icon_my"
+            android:iconTint="@color/colorAccent"
+
+    />
+
+</menu>

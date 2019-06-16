@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WanAndroid</string>
+    <string name="main_home">首页</string>
+    <string name="main_system">体系</string>
+    <string name="main_project">项目</string>
+    <string name="main_my">我的</string>
 </resources>
