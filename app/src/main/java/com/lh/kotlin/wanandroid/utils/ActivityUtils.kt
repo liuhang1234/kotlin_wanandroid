@@ -1,10 +1,10 @@
 package com.lh.kotlin.wanandroid.utils
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 object ActivityUtils {
-    fun addFragmenttoActivity(fragmentManager: FragmentManager,fragment: Fragment,layoutid:Int) {
+    fun addFragmenttoActivity(fragmentManager: FragmentManager, fragment: Fragment, layoutid:Int) {
         ActivityUtils.addFragmenttoActivity(fragmentManager,fragment,layoutid,null)
     }
     fun addFragmenttoActivity(fragmentManager: FragmentManager, fragment: Fragment, layoutid:Int, tag: String?) {

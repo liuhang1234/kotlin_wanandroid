@@ -1,6 +1,6 @@
 package com.lh.kotlin.wanandroid
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import butterknife.ButterKnife
 import com.lh.kotlin.wanandroid.base.BaseFragment

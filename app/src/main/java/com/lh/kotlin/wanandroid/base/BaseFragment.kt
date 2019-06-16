@@ -1,6 +1,6 @@
 package com.lh.kotlin.wanandroid.base
 
-import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,23 +13,21 @@ abstract class BaseFragment : RxFragment() {
     protected var mActivity: BaseToolBarActivity? = null
 
     protected var unbinder : Unbinder?=null
-    override fun onAttach(activity: Activity?) {
+    override fun onAttach(activity: Context) {
         super.onAttach(activity)
         if (activity is BaseToolBarActivity) {
             mActivity = activity
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
 
-//    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        var view = inflater?.inflate(getLayoutId(), container, false) as View
-//        initView(view,savedInstanceState)
-//        unbinder = ButterKnife.bind(this, view)
-//        return view
-//    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var view = inflater?.inflate(getLayoutId(), container, false) as View
+        initView(view,savedInstanceState)
+        unbinder = ButterKnife.bind(this, view)
+        return view
+    }
 
     abstract fun getLayoutId():Int
 
