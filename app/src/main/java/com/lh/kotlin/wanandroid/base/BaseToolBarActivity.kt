@@ -48,7 +48,6 @@ abstract class BaseToolBarActivity : BaseActivity(),View.OnClickListener {
         mRight2Iv = findViewById(R.id.right2_iv)
 
         if (mToolbar == null || mAppBarLayout == null) {
-            Log.e("liuhang","mToolbar = "+mToolbar +"  mAppBarLayout = "+mAppBarLayout)
             throw IllegalStateException(
                 "The BaseToolBarActivity must contain a toolbar."
             )
@@ -64,6 +63,7 @@ abstract class BaseToolBarActivity : BaseActivity(),View.OnClickListener {
         showRightIv(false)
         showRightTv(false)
         setListener()
+        showToolbar(false)
     }
 
     private fun setListener() {

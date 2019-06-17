@@ -7,5 +7,4 @@
         android:layout_height="match_parent"
         tools:context=".Main2Activity">
 
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

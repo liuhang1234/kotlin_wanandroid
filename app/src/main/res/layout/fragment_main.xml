@@ -5,10 +5,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
             android:layout_weight="1"
+            android:background="@color/colorAccent"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_0_dip"></androidx.viewpager2.widget.ViewPager2>
+            android:layout_height="@dimen/dimen_0_dip">
+
+    </androidx.viewpager.widget.ViewPager>
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
             app:itemTextColor="@color/colorAccent"
@@ -16,4 +20,8 @@
             app:menu="@menu/menu_buttom_navi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+    <!--            app:labelVisibilityMode="labeled"
+                    显示字体的
+-->
 </LinearLayout>
