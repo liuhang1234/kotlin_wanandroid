@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.View
 import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
+import com.lh.kotlin.wanandroid.module.HomeListData
 
-class HomeFragment:BaseFragment() {
+class HomeFragment:BaseFragment() ,HomeContract.View{
+
+
+    private var homePresenter : HomePresenter? =null
 
     companion object {
         fun newInstance():HomeFragment  {
@@ -21,5 +25,20 @@ class HomeFragment:BaseFragment() {
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
+        initPresenter()
+    }
+
+    private fun initPresenter() {
+        homePresenter = HomePresenter(this)
+        homePresenter?.getHomeList(1, loadMore = true)
+    }
+
+    override fun showTip(tip: String) {
+    }
+
+    override fun showData(data: HomeListData) {
+    }
+
+    override fun setPresenter(presenter: HomeContract.Presenter) {
     }
 }
