@@ -1,18 +1,33 @@
 package com.lh.kotlin.wanandroid.business.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
-import com.lh.kotlin.wanandroid.module.HomeListData
+import com.lh.kotlin.wanandroid.module.Datas
+import kotlinx.android.synthetic.main.list_view.*
 
-class HomeFragment:BaseFragment() ,HomeContract.View{
+class HomeFragment : BaseFragment(), HomeContract.View {
 
 
-    private var homePresenter : HomePresenter? =null
+    private val homePresenter: HomePresenter by lazy {
+        HomePresenter(this)
+    }
+
+    private val mAdapter:HomeAdapter by lazy {
+        HomeAdapter(this,null)
+    }
+
+    private val linearLayoutManager :LinearLayoutManager by lazy {
+        LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false)
+    }
+    private var mDatas = ArrayList<Datas>()
 
     companion object {
-        fun newInstance():HomeFragment  {
+        fun newInstance(): HomeFragment {
             var bundle = Bundle()
             var homeFragment = HomeFragment()
             homeFragment.arguments = bundle
@@ -25,20 +40,58 @@ class HomeFragment:BaseFragment() ,HomeContract.View{
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
-        initPresenter()
+        initData()
     }
 
-    private fun initPresenter() {
-        homePresenter = HomePresenter(this)
-        homePresenter?.getHomeList(1, loadMore = true)
+    fun initData() {
+        rv.layoutManager = linearLayoutManager
+        rv.run {
+            layoutManager = linearLayoutManager
+            adapter = mAdapter
+        }
+        smartRefreshLayout.autoRefresh()
+        smartRefreshLayout.setEnableRefresh(true)
+        smartRefreshLayout.setEnableAutoLoadMore(true)
+        smartRefreshLayout.setOnRefreshListener { queryData() }
+        smartRefreshLayout.setOnLoadMoreListener { onLoadMoreRequested() }
     }
 
-    override fun showTip(tip: String) {
+    private fun queryData() {
+        homePresenter.getHomeList(false)
     }
 
-    override fun showData(data: HomeListData) {
+    private fun onLoadMoreRequested() {
+        homePresenter.getHomeList(true)
+    }
+
+    override fun showTip(tip: String?) {
+    }
+
+    override fun showData(datas: List<Datas>) {
+        
+        Log.d("liuhang","adapter ="+rv.adapter+" adapter2 ="+mAdapter)
+        mAdapter.setNewData(datas)
+        mAdapter.notifyDataSetChanged()
     }
 
     override fun setPresenter(presenter: HomeContract.Presenter) {
+    }
+
+    override fun loadMoreFail() {
+        smartRefreshLayout.finishLoadMoreWithNoMoreData()
+    }
+
+    override fun refreshComplete() {
+        smartRefreshLayout.finishRefresh()
+    }
+
+    override fun loadMoreComplete() {
+        smartRefreshLayout.finishLoadMore()
+    }
+
+    override fun loadMoreEnd() {
+        smartRefreshLayout.finishLoadMoreWithNoMoreData()
+    }
+    override fun showEmptyView() {
     }
 }

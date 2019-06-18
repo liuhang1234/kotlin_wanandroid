@@ -10,7 +10,8 @@ import com.lh.kotlin.wanandroid.module.HomeListData
 import io.reactivex.disposables.CompositeDisposable
 
 class HomePresenter(var mView:HomeContract.View):HomeContract.Presenter {
-    private var mList: ArrayList<Datas>?=null
+    private val mDatas= mutableListOf<Datas>()
+
     private var mCompositeDisposable: CompositeDisposable?=null
 
     private var page = 0
@@ -18,17 +19,45 @@ class HomePresenter(var mView:HomeContract.View):HomeContract.Presenter {
         mView.setPresenter(this)
         mCompositeDisposable = CompositeDisposable()
     }
-    override fun getHomeList(index: Int, loadMore: Boolean) {
-        RetrofitUtils.createService().getHomeList(index)
+    override fun getHomeList( loadMore: Boolean) {
+        if (!loadMore) {
+            page = 0
+        }
+        RetrofitUtils.createService().getHomeList(page++)
             .compose(TransformUtils.defaultSchedulers(mView))
             .subscribe(object : HttpResponseSubscriber<HomeListData>(){
                 override fun onSuccess(result: HomeListData) {
-                    Log.e("liuhang","onSuccess"+result.pageCount)
+                    if (result == null) {
+                        mView.loadMoreFail()
+                        mView.refreshComplete()
+                        mView.showEmptyView()
+                        mView.loadMoreEnd()
+                        return
+                    }
+                    if (!loadMore) {
+                        mDatas.clear()
+                    }
+                    if (result.over) {
+                        mView.loadMoreEnd()
+                    }else{
+                        mView.loadMoreComplete()
+                    }
+                    if (loadMore) {
+                        mView.loadMoreComplete()
+                    } else{
+                        mView.refreshComplete()
+                    }
+                    mDatas.addAll(result.datas!!)
+                    Log.e("liuhang","mDatas = "+mDatas.size)
+                    mView.showData(mDatas)
+
                 }
 
                 override fun onHttpError(e: HttpThrowable) {
-                    Log.e("liuhang","onHttpError "+e.message)
-
+                    mView.showTip(e.message)
+                    mView.loadMoreFail()
+                    mView.refreshComplete()
+                    mView.showEmptyView()
                 }
 
             })
