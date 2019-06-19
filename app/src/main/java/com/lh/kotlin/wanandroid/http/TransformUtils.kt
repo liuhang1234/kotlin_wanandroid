@@ -11,11 +11,11 @@ class TransformUtils {
         fun <T>defaultSchedulers():ObservableTransformer<T,T>{
             return ObservableTransformer { tObservable -> tObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()) }
         }
-        fun <T> defaultSchedulers(baseView: BaseView<*>?): ObservableTransformer<T,T> {
+        fun <T> defaultSchedulers(baseView: BaseView<*>): ObservableTransformer<T,T> {
             if(null != baseView && baseView is BaseFragment) {
                 return ObservableTransformer {
                     tObservable -> tObservable.subscribeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
+                    .observeOn(AndroidSchedulers.mainThread())
                     .compose((baseView as BaseFragment).bindToLifecycle())
                 }
             }

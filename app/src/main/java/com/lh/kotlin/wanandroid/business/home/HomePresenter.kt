@@ -64,6 +64,6 @@ class HomePresenter(var mView:HomeContract.View):HomeContract.Presenter {
     }
 
     override fun unsubscribe() {
-        mCompositeDisposable!!.dispose()
+        mCompositeDisposable?.dispose()
     }
 }
