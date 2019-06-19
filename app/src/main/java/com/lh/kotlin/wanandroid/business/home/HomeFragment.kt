@@ -94,4 +94,9 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
     override fun showEmptyView() {
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        homePresenter.unsubscribe()
+    }
 }
