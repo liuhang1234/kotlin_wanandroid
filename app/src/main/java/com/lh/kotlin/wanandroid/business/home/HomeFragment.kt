@@ -1,12 +1,17 @@
 package com.lh.kotlin.wanandroid.business.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
+import com.lh.kotlin.wanandroid.business.detail.DetailActivity
 import com.lh.kotlin.wanandroid.module.Datas
 import kotlinx.android.synthetic.main.list_view.*
 
@@ -49,6 +54,17 @@ class HomeFragment : BaseFragment(), HomeContract.View {
             layoutManager = linearLayoutManager
             adapter = mAdapter
         }
+        mAdapter.onItemClickListener =
+            BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+                var bundle = Bundle()
+                var any = adapter?.data!![position] as Datas
+
+                bundle.putString(DetailActivity.URL,any.link)
+                var intent = Intent(mActivity,DetailActivity::class.java)
+                intent.putExtra(DetailActivity.BUNDLE,bundle)
+                startActivity(intent)
+//                ARouter.getInstance().build("/detailActivity/detailActivity").with(bundle).navigation()
+            }
         smartRefreshLayout.autoRefresh()
         smartRefreshLayout.setEnableRefresh(true)
         smartRefreshLayout.setEnableAutoLoadMore(true)
