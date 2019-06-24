@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
 import com.lh.kotlin.wanandroid.business.detail.DetailActivity
+import com.lh.kotlin.wanandroid.config.RouterManager
 import com.lh.kotlin.wanandroid.module.Datas
 import kotlinx.android.synthetic.main.list_view.*
 
@@ -56,14 +57,8 @@ class HomeFragment : BaseFragment(), HomeContract.View {
         }
         mAdapter.onItemClickListener =
             BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
-                var bundle = Bundle()
                 var any = adapter?.data!![position] as Datas
-
-                bundle.putString(DetailActivity.URL,any.link)
-                var intent = Intent(mActivity,DetailActivity::class.java)
-                intent.putExtra(DetailActivity.BUNDLE,bundle)
-                startActivity(intent)
-//                ARouter.getInstance().build("/detailActivity/detailActivity").with(bundle).navigation()
+                RouterManager.jumpToDetailActivity(any.link)
             }
         smartRefreshLayout.autoRefresh()
         smartRefreshLayout.setEnableRefresh(true)

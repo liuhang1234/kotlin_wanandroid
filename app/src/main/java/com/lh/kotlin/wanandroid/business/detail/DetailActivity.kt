@@ -5,16 +5,16 @@ import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseActivity
 import com.lh.kotlin.wanandroid.base.BaseFragment
 import com.lh.kotlin.wanandroid.base.BaseToolBarActivity
+import com.lh.kotlin.wanandroid.config.Consts
 
-@Route(path = "/detailActivity/detailActivity")
+@Route(path = Consts.DETAIL_ACTIVITY)
 class DetailActivity :BaseToolBarActivity(){
     companion object {
         val URL = "URL"
         val BUNDLE = "bundle"
     }
     override fun getFragment(): BaseFragment? {
-        var bundleExtra = intent.getBundleExtra(BUNDLE)
-        var newInstance = DetailFragment.newInstance(bundleExtra)
+        var newInstance = DetailFragment.newInstance(intent.extras)
         return newInstance
     }
 
