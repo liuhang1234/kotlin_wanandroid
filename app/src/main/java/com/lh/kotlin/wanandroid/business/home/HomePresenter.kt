@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 class HomePresenter(var mView:HomeContract.View):HomeContract.Presenter {
     private val mDatas= mutableListOf<Datas>()
 
-    private var mCompositeDisposable: CompositeDisposable?=null
+    private var mCompositeDisposable: CompositeDisposable? = null
 
     private var page = 0
     init {
@@ -54,6 +54,7 @@ class HomePresenter(var mView:HomeContract.View):HomeContract.Presenter {
                 }
 
                 override fun onHttpError(e: HttpThrowable) {
+                    page--
                     mView.showTip(e.message)
                     mView.loadMoreFail()
                     mView.refreshComplete()

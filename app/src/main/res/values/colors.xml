@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#CCCCCC</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBottomNavigationBackground">#E6E6E6</color>
+    <color name="text666">#666666</color>
+    <color name="text999">#999999</color>
+    <color name="text333">#333333</color>
 </resources>

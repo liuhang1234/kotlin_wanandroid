@@ -50,7 +50,6 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     fun initData() {
-        rv.layoutManager = linearLayoutManager
         rv.run {
             layoutManager = linearLayoutManager
             adapter = mAdapter
