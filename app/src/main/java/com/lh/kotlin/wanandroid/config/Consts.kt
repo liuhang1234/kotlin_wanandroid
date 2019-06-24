@@ -7,5 +7,7 @@ package com.lh.kotlin.wanandroid.config
 class Consts {
     companion object{
         const val DETAIL_ACTIVITY = "/detailActivity/DetailActivity" //详情
+
+        const val SYSTEM_LIST_ACTIVITY = "/systemListActivity/systemListActivity" //体系列表
     }
 }

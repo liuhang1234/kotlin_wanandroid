@@ -5,6 +5,7 @@ import com.lh.kotlin.wanandroid.module.TreeListData
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
     /**
@@ -13,6 +14,16 @@ interface ApiService {
     @GET("article/list/{index}/json")
     fun getHomeList(@Path("index")index:Int ): Observable<BaseResponse<HomeListData>>
 
+    /**
+     * 体系
+     */
     @GET("/tree/json")
     fun getTreeList():Observable<BaseResponse<List<TreeListData>>>
+
+    /**
+     * 体系下的某一个
+     */
+    @GET("article/list/{index}/json")
+    fun getSystemList(@Path("index")index: Int,
+                      @Query("cid") cid: Int) :Observable<BaseResponse<Object>>
 }
