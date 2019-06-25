@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import java.util.logging.Logger
 
 /**
- * Created by SJD
+ * Created by lh
  * time: 2019/6/24
  */
 class SystemPresenter(var mView: SystemContract.View) : SystemContract.Presenter {

@@ -6,7 +6,7 @@ import com.lh.kotlin.wanandroid.module.Datas
 import com.lh.kotlin.wanandroid.module.TreeListData
 
 /**
- * Created by SJD
+ * Created by lh
  * time: 2019/6/24
  */
 interface SystemContract {

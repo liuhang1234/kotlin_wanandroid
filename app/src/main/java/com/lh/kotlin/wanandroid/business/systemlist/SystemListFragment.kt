@@ -6,7 +6,7 @@ import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
 
 /**
- * Created by SJD
+ * Created by lh
  * time: 2019/6/24
  */
 class SystemListFragment:BaseFragment() {

@@ -25,5 +25,5 @@ interface ApiService {
      */
     @GET("article/list/{index}/json")
     fun getSystemList(@Path("index")index: Int,
-                      @Query("cid") cid: Int) :Observable<BaseResponse<Object>>
+                      @Query("cid") cid: Int) :Observable<BaseResponse<HomeListData>>
 }

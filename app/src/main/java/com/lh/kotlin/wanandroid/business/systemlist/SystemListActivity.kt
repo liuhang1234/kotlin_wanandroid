@@ -14,7 +14,7 @@ import com.lh.kotlin.wanandroid.config.Consts
 class SystemListActivity:BaseToolBarActivity() {
 
     companion object{
-        val DATA = "data"
+        const val DATA = "data"
     }
     override fun getFragment(): BaseFragment? {
         return SystemListFragment.newInstance(intent.extras)
