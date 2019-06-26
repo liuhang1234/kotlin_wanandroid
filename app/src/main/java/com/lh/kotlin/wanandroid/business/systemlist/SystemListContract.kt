@@ -14,6 +14,16 @@ interface SystemListContract {
         fun showTip(tip:String)
 
         fun showData(datas: List<Datas>)
+
+        fun loadMoreFail()
+
+        fun refreshComplete()
+
+        fun loadMoreComplete()
+
+        fun loadMoreEnd()
+
+        fun showEmptyView()
     }
 
     interface Presenter :BasePresenter{

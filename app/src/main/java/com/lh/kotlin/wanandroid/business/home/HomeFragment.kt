@@ -78,10 +78,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     override fun showData(datas: List<Datas>) {
-        
-        Log.d("liuhang","adapter ="+rv.adapter+" adapter2 ="+mAdapter)
         mAdapter.setNewData(datas)
-        mAdapter.notifyDataSetChanged()
     }
 
     override fun setPresenter(presenter: HomeContract.Presenter) {

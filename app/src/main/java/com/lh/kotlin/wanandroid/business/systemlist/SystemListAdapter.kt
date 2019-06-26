@@ -1,27 +1,26 @@
-package com.lh.kotlin.wanandroid.business.home
+package com.lh.kotlin.wanandroid.business.systemlist
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
 import com.lh.kotlin.wanandroid.module.Datas
+import com.lh.kotlin.wanandroid.module.HomeListData
 
 /**
  * Created by lh
+ * time: 2019/6/26
  */
-class HomeAdapter(baseFragment: BaseFragment, data: MutableList<Datas>?) :
+class SystemListAdapter(baseFragment: BaseFragment, date: MutableList<Datas>?) :
     BaseQuickAdapter<Datas, BaseViewHolder>(R.layout.item_home_list) {
     override fun convert(helper: BaseViewHolder?, item: Datas?) {
-        if(item == null) {
+        if (item == null) {
             return
         }
         @Suppress("DEPRECATION")
         helper!!.setText(R.id.homeItemTitle, item.title)
             .setText(R.id.homeItemAuthor, item.author)
-            .setText(R.id.homeItemType, item.chapterName)
-            .addOnClickListener(R.id.homeItemType)
-            .setTextColor(R.id.homeItemType, mContext.resources.getColor(R.color.colorPrimary))
-            .linkify(R.id.homeItemType)
+            .setVisible(R.id.homeItemType, false)
             .setText(R.id.homeItemDate, item.niceDate)
             .setImageResource(
                 R.id.homeItemLike,
@@ -29,5 +28,4 @@ class HomeAdapter(baseFragment: BaseFragment, data: MutableList<Datas>?) :
             )
             .addOnClickListener(R.id.homeItemLike)
     }
-
 }

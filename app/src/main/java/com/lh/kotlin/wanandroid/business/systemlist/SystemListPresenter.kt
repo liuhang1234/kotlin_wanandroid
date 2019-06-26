@@ -13,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
  */
 class SystemListPresenter(var mView:SystemListContract.View): SystemListContract.Presenter{
 
-    private val mDatas= mutableListOf<HomeListData>()
+    private val mDatas= mutableListOf<Datas>()
 
     private var mCompositeDisposable: CompositeDisposable? = null
     private var page = 0
@@ -30,7 +30,28 @@ class SystemListPresenter(var mView:SystemListContract.View): SystemListContract
             .compose(TransformUtils.defaultSchedulers(mView))
             .subscribe(object : HttpResponseSubscriber<HomeListData>(){
                 override fun onSuccess(result: HomeListData) {
-                    Log.e("liuhang","result = "+result.size)
+                    if (result == null) {
+                        mView.loadMoreFail()
+                        mView.refreshComplete()
+                        mView.showEmptyView()
+                        mView.loadMoreEnd()
+                        return
+                    }
+                    if (!loadMore) {
+                        mDatas.clear()
+                    }
+                    if (result.over) {
+                        mView.loadMoreEnd()
+                    }else{
+                        mView.loadMoreComplete()
+                    }
+                    if (loadMore) {
+                        mView.loadMoreComplete()
+                    } else{
+                        mView.refreshComplete()
+                    }
+                    mDatas.addAll(result.datas!!)
+                    mView.showData(mDatas)
                 }
 
                 override fun onHttpError(e: HttpThrowable) {
