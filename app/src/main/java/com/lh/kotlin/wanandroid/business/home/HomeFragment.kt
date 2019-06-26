@@ -3,7 +3,9 @@ package com.lh.kotlin.wanandroid.business.home
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,17 +21,11 @@ import kotlinx.android.synthetic.main.list_view.*
 class HomeFragment : BaseFragment(), HomeContract.View {
 
 
-    private val homePresenter: HomePresenter by lazy {
-        HomePresenter(this)
-    }
+    private var homePresenter: HomeContract.Presenter ? = null
 
-    private val mAdapter:HomeAdapter by lazy {
-        HomeAdapter(this,null)
-    }
+    private var mAdapter:HomeAdapter ? = null
 
-    private val linearLayoutManager :LinearLayoutManager by lazy {
-        LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false)
-    }
+
     private var mDatas = ArrayList<Datas>()
 
     companion object {
@@ -46,15 +42,16 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
+        HomePresenter(this)
         initData()
     }
 
     fun initData() {
-        rv.run {
-            layoutManager = linearLayoutManager
-            adapter = mAdapter
-        }
-        mAdapter.onItemClickListener =
+        rv.layoutManager = LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false)
+        mAdapter =  HomeAdapter(this,null)
+        rv.adapter = mAdapter
+
+        mAdapter?.onItemClickListener =
             BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
                 var any = adapter?.data!![position] as Datas
                 RouterManager.jumpToDetailActivity(any.link)
@@ -67,21 +64,22 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     private fun queryData() {
-        homePresenter.getHomeList(false)
+        homePresenter?.getHomeList(false)
     }
 
     private fun onLoadMoreRequested() {
-        homePresenter.getHomeList(true)
+        homePresenter?.getHomeList(true)
     }
 
     override fun showTip(tip: String?) {
     }
 
     override fun showData(datas: List<Datas>) {
-        mAdapter.setNewData(datas)
+        mAdapter?.setNewData(datas)
     }
 
     override fun setPresenter(presenter: HomeContract.Presenter) {
+        homePresenter = presenter
     }
 
     override fun loadMoreFail() {
@@ -104,6 +102,6 @@ class HomeFragment : BaseFragment(), HomeContract.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        homePresenter.unsubscribe()
+        homePresenter?.unsubscribe()
     }
 }

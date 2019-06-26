@@ -34,7 +34,8 @@ class SystemPresenter(var mView: SystemContract.View) : SystemContract.Presenter
                 }
 
                 override fun onHttpError(e: HttpThrowable) {
-                    Log.e("liuhang","e = "+e.message)
+                    Log.e("liuhang", "e = $e")
+                    e.printStackTrace()
                 }
 
             })

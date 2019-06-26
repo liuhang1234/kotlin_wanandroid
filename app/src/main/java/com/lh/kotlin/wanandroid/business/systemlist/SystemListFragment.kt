@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.lh.kotlin.wanandroid.R
 import com.lh.kotlin.wanandroid.base.BaseFragment
+import com.lh.kotlin.wanandroid.business.home.HomePresenter
 import com.lh.kotlin.wanandroid.config.RouterManager
 import com.lh.kotlin.wanandroid.module.Datas
 import com.lh.kotlin.wanandroid.module.TreeListData
@@ -20,11 +21,8 @@ class SystemListFragment : BaseFragment(), SystemListContract.View {
 
     private var mAdapter: SystemListAdapter? = null;
 
-    private val systemListPresenter: SystemListPresenter by lazy {
-        SystemListPresenter(this)
-    }
+    private var systemListPresenter: SystemListContract.Presenter? = null
 
-    private val linearLayoutManager: LinearLayoutManager? = null
     private var cid: Int? = -1
 
     companion object {
@@ -44,6 +42,7 @@ class SystemListFragment : BaseFragment(), SystemListContract.View {
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
+        SystemListPresenter(this)
         var serializable = arguments?.getSerializable(SystemListActivity.DATA) as TreeListData.Children
         cid = serializable.id
         initData()
@@ -67,11 +66,11 @@ class SystemListFragment : BaseFragment(), SystemListContract.View {
     }
 
     private fun queryData() {
-        systemListPresenter.getSystemList(cid, false)
+        systemListPresenter?.getSystemList(cid, false)
     }
 
     private fun onLoadMoreRequested() {
-        systemListPresenter.getSystemList(cid, true)
+        systemListPresenter?.getSystemList(cid, true)
 
     }
 
@@ -83,6 +82,7 @@ class SystemListFragment : BaseFragment(), SystemListContract.View {
     }
 
     override fun setPresenter(presenter: SystemListContract.Presenter) {
+        systemListPresenter = presenter
     }
 
     override fun loadMoreFail() {

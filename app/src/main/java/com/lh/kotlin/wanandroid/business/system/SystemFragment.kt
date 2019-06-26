@@ -18,15 +18,8 @@ import kotlinx.android.synthetic.main.fragment_system.*
 class SystemFragment : BaseFragment(), SystemContract.View {
 
 
-    private val systemPresenter: SystemPresenter by lazy {
-        SystemPresenter(this)
-    }
-    private val mAdapter: SystemAdapter by lazy {
-        SystemAdapter(this, null)
-    }
-    private val linearLayoutManager: LinearLayoutManager by lazy {
-        LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
-    }
+    private var systemPresenter: SystemContract.Presenter? = null
+    private var mAdapter: SystemAdapter? = null
 
     private var mDatas = ArrayList<TreeListData.Children>()
 
@@ -44,28 +37,30 @@ class SystemFragment : BaseFragment(), SystemContract.View {
     }
 
     override fun initView(view: View, savedInstanceState: Bundle?) {
-        rv.run {
-            layoutManager = linearLayoutManager
-            adapter = mAdapter
-        }
-        mAdapter.onItemClickListener =
+        SystemPresenter(this)
+        rv.layoutManager = LinearLayoutManager(mActivity, RecyclerView.VERTICAL, false)
+        mAdapter = SystemAdapter(this, null)
+        rv.adapter = mAdapter
+
+        mAdapter?.onItemClickListener =
             BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
-                var treeListData = mAdapter.data[position] as TreeListData
+                var treeListData = mAdapter!!.data[position] as TreeListData
 //                var children = treeListData?.children?.get(0) as TreeListData.Children
                 RouterManager.jumpToSystemViewPagerActivity(treeListData)
 
             }
-        systemPresenter.getTreeList()
+        systemPresenter?.getTreeList()
     }
 
     override fun showTip(tip: String) {
     }
 
     override fun setPresenter(presenter: SystemContract.Presenter) {
+        systemPresenter = presenter
     }
 
     override fun showData(datas: List<TreeListData>) {
-        mAdapter.setNewData(datas)
+        mAdapter?.setNewData(datas)
     }
 
 
@@ -74,6 +69,6 @@ class SystemFragment : BaseFragment(), SystemContract.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        systemPresenter.unsubscribe()
+        systemPresenter?.unsubscribe()
     }
 }
