@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_8_dip"
+        android:layout_marginEnd="@dimen/dimen_12_dip"
+        android:layout_marginStart="@dimen/dimen_12_dip"
+        android:layout_marginTop="@dimen/dimen_8_dip"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/colorBottomNavigationBackground"
+        app:cardCornerRadius="@dimen/dimen_3_dip"
+        app:cardElevation="@dimen/dimen_2_dip">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_180_dip"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_12_dip">
+
+        <ImageView
+                android:id="@+id/item_project_list_iv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_launcher"/>
+
+        <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dimen_16_dip"
+                android:layout_weight="5">
+
+            <TextView
+                    android:id="@+id/item_project_list_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_6_dip"
+                    android:drawablePadding="@dimen/dimen_5_dip"
+                    android:drawableStart="@mipmap/ic_launcher"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textColor="@color/text666"
+                    android:textSize="@dimen/sp_16"
+                    tools:text="【开源完整项目】diycode客户端"/>
+
+            <TextView
+                    android:id="@+id/item_project_list_content_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/item_project_list_title_tv"
+                    android:layout_marginTop="@dimen/dimen_16_dip"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    tools:text="Diycode 社区客户端，可以更方便的在手机上查看社区信息。应用采用了数据多级缓存，并且实现了离线浏览(访问过一次的页面会被缓存下来，没有网络也可查看)，相比于网页版，在一定程度上可以"
+                    android:textColor="@color/text666"/>
+
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/item_project_list_content_tv">
+
+                <TextView
+                        android:id="@+id/item_project_list_time_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        tools:text="2018-01-29"
+                        android:textColor="@color/text666"/>
+
+                <TextView
+                        android:id="@+id/item_project_list_author_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dimen_5_dip"
+                        android:layout_toEndOf="@id/item_project_list_time_tv"
+                        android:gravity="center"
+                        tools:text="GcsSloop"
+                        android:textColor="@color/text666"/>
+
+                <TextView
+                        android:id="@+id/item_project_list_install_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dimen_5_dip"
+                        android:text="下载"
+                        android:textColor="@color/colorAccent"
+                        android:visibility="gone"
+                        tools:text="下载"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
