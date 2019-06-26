@@ -12,6 +12,7 @@ import com.lh.kotlin.wanandroid.module.TreeListData
  */
 class RouterManager {
     companion object{
+        // 跳转到详情列表
         fun jumpToDetailActivity(url:String) {
             var bundle = Bundle()
             bundle.putString(DetailActivity.URL,url)
@@ -22,7 +23,15 @@ class RouterManager {
         fun jumpToSystemActivity(children: TreeListData.Children) {
             var bundle = Bundle()
             bundle.putSerializable(SystemListActivity.DATA,children)
-            ARouter.getInstance().build(Consts.DETAIL_ACTIVITY)
+            ARouter.getInstance().build(Consts.SYSTEM_LIST_ACTIVITY)
+                .with(bundle).navigation()
+        }
+
+        // 跳转到体系列表
+        fun jumpToSystemViewPagerActivity(data: TreeListData) {
+            var bundle = Bundle()
+            bundle.putSerializable(SystemListActivity.DATA,data)
+            ARouter.getInstance().build(Consts.SYSTEM_VIEWPAGER_ACTIVITY)
                 .with(bundle).navigation()
         }
     }

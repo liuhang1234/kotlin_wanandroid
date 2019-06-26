@@ -1,8 +1,10 @@
 package com.lh.kotlin.wanandroid.business.systemlist
 
-import com.lh.kotlin.wanandroid.http.BaseResponse
-import com.lh.kotlin.wanandroid.http.RetrofitUtils
-import com.lh.kotlin.wanandroid.http.TransformUtils
+import android.util.Log
+import com.lh.kotlin.wanandroid.http.*
+import com.lh.kotlin.wanandroid.module.Datas
+import com.lh.kotlin.wanandroid.module.HomeListData
+import com.lh.kotlin.wanandroid.module.TreeListData
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -11,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
  */
 class SystemListPresenter(var mView:SystemListContract.View): SystemListContract.Presenter{
 
+    private val mDatas= mutableListOf<HomeListData>()
 
     private var mCompositeDisposable: CompositeDisposable? = null
     private var page = 0
@@ -19,13 +22,23 @@ class SystemListPresenter(var mView:SystemListContract.View): SystemListContract
         mCompositeDisposable = CompositeDisposable()
     }
 
-    override fun getSystemList(cid: Int, loadMore: Boolean) {
+    override fun getSystemList(cid: Int?, loadMore: Boolean) {
         if (!loadMore) {
             page = 0
         }
-//        RetrofitUtils.createService().getSystemList(page,cid)
-//            .compose(TransformUtils.defaultSchedulers(mView))
-//            .subscribe(object :BaseResponse<>)
+        RetrofitUtils.createService().getSystemList(page++,cid)
+            .compose(TransformUtils.defaultSchedulers(mView))
+            .subscribe(object : HttpResponseSubscriber<HomeListData>(){
+                override fun onSuccess(result: HomeListData) {
+                    Log.e("liuhang","result = "+result.size)
+                }
+
+                override fun onHttpError(e: HttpThrowable) {
+                    Log.e("liuhang","onHttpError = "+e.message)
+
+                }
+
+            })
     }
     override fun unsubscribe() {
         mCompositeDisposable?.dispose()

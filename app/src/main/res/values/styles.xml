@@ -7,5 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="TabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/common_text_size13</item>
+        <item name="textAllCaps">false</item>
+    </style>
 </resources>

@@ -46,13 +46,13 @@ class SystemAdapter(baseFragment: BaseFragment,datas:List<TreeListData>?)
                     return tv
                 }
 
-                override fun onSelected(position: Int, view: View?) {
-                    super.onSelected(position, view)
-                }
-
-                override fun unSelected(position: Int, view: View?) {
-                    super.unSelected(position, view)
-                }
+//                override fun onSelected(position: Int, view: View?) {
+//                    super.onSelected(position, view)
+//                }
+//
+//                override fun unSelected(position: Int, view: View?) {
+//                    super.unSelected(position, view)
+//                }
 
             }
             item_flow_layout.adapter = tagAdapter

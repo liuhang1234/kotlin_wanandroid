@@ -33,6 +33,7 @@
         </activity>
         <activity android:name=".business.detail.DetailActivity"/>
         <activity android:name=".business.systemlist.SystemListActivity"/>
+        <activity android:name=".business.systemviewpager.SystemViewpagerActivity"/>
     </application>
 
 </manifest>

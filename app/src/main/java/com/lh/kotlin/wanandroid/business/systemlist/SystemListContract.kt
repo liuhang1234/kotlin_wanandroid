@@ -17,6 +17,6 @@ interface SystemListContract {
     }
 
     interface Presenter :BasePresenter{
-        fun getSystemList(cid: Int,loadMore:Boolean)
+        fun getSystemList(cid: Int?,loadMore:Boolean)
     }
 }

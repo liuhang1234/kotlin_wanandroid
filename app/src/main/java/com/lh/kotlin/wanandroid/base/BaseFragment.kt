@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import com.trello.rxlifecycle2.components.support.RxFragment
 
 abstract class BaseFragment : RxFragment() {
+
+
+
     protected var mActivity: BaseToolBarActivity? = null
 
     override fun onAttach(activity: Context) {
@@ -36,7 +39,5 @@ abstract class BaseFragment : RxFragment() {
 
     abstract fun initView(view :View, savedInstanceState: Bundle?)
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
+
 }
