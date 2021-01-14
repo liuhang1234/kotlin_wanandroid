@@ -24,6 +24,7 @@ class MainActivity : BaseToolBarActivity() {
     override fun init() {
         super.init()
         initTab()
+        //测试一下
     }
     private fun initTab() {
     }
